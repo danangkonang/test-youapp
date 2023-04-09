@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    container_name: mongo
+    networks:
+      - backend
+  app:
+    build: .
+    container_name: app
+    restart: always
+    depends_on: 
+      - mongo
+    ports:
+      - 3000:3000
+    networks:
+      - backend
+networks:
+  backend:
